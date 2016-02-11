@@ -1,0 +1,12 @@
+= semantic_form_for resource, as: resource_name, url: password_path(resource_name), html: { method: :put } do |f|
+  h3 Change your password
+
+  = devise_error_messages!
+
+  = f.hidden_field :reset_password_token
+
+  = f.inputs do
+    = f.input :email, input_html: { autofocus: true }
+
+  = f.actions do
+    = f.action :submit, label: 'Change my Password'
