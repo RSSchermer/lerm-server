@@ -5,4 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :memberships, dependent: :destroy
+
+  def project_member?(project_id)
+    Membership.where(user_id: id, project_id: project_id).exists?
+  end
 end
