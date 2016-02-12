@@ -11,6 +11,7 @@ gem 'formtastic'
 
 # Auth
 gem 'devise'
+gem 'pundit'
 
 # Layout
 gem 'sass-rails', '~> 5.0'
