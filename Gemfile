@@ -18,6 +18,7 @@ gem 'pundit'
 
 # API
 gem 'jsonapi-resources'
+gem 'jsonapi-authorization'
 
 # CSS
 gem 'sass-rails', '~> 5.0'

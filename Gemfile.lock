@@ -86,6 +86,9 @@ GEM
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
     json (1.8.3)
+    jsonapi-authorization (0.5.0)
+      jsonapi-resources (= 0.7.0)
+      pundit (~> 1.0)
     jsonapi-resources (0.7.0)
       rails (>= 4.0)
     kgio (2.10.0)
@@ -215,6 +218,7 @@ DEPENDENCIES
   formtastic
   formtastic-bootstrap
   jquery-rails
+  jsonapi-authorization
   jsonapi-resources
   pundit
   rails (= 4.2.5.1)
