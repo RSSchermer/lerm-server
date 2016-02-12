@@ -7,16 +7,21 @@ gem 'rails', '4.2.5.1'
 gem 'unicorn'
 gem 'sqlite3'
 gem 'slim-rails'
+
+# Forms
 gem 'formtastic'
+gem 'formtastic-bootstrap'
 
 # Auth
 gem 'devise'
 gem 'pundit'
 
-# Layout
+# API
+gem 'jsonapi-resources'
+
+# CSS
 gem 'sass-rails', '~> 5.0'
 gem 'bootstrap-sass'
-gem 'formtastic-bootstrap'
 
 # Javascript
 gem 'uglifier', '>= 1.3.0'
