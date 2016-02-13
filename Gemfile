@@ -19,6 +19,7 @@ gem 'pundit'
 # API
 gem 'jsonapi-resources'
 gem 'jsonapi-authorization'
+gem 'doorkeeper'
 
 # CSS
 gem 'sass-rails', '~> 5.0'

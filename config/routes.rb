@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  use_doorkeeper
   devise_for :users
 
   scope 'api/v1', module: 'api/v1' do
