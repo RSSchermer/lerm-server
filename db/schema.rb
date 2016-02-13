@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160213143029) do
+ActiveRecord::Schema.define(version: 20160213192747) do
 
   create_table "memberships", force: :cascade do |t|
     t.integer  "user_id",    null: false
@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(version: 20160213143029) do
     t.boolean  "discarded"
     t.boolean  "crisp"
     t.text     "data_element_expression"
-    t.integer  "rule_id"
+    t.integer  "rule_id",                 null: false
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
   end
@@ -97,6 +97,19 @@ ActiveRecord::Schema.define(version: 20160213143029) do
 
   add_index "rules", ["label"], name: "index_rules_on_label"
   add_index "rules", ["project_id"], name: "index_rules_on_project_id"
+
+  create_table "statements", force: :cascade do |t|
+    t.text     "condition"
+    t.text     "consequence"
+    t.text     "cleaned_condition"
+    t.text     "cleaned_consequence"
+    t.boolean  "discarded",           default: false
+    t.integer  "rule_id",                             null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+  end
+
+  add_index "statements", ["rule_id"], name: "index_statements_on_rule_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false

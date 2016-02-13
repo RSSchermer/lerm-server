@@ -3,6 +3,7 @@ class Rule < ActiveRecord::Base
 
   belongs_to :project
   has_many :phrases, dependent: :destroy
+  has_many :statements, dependent: :destroy
 
   validates :label, presence: true, uniqueness: { scope: :project }
   validates :original_text, presence: true
