@@ -1,5 +1,3 @@
-require 'faker'
-
 FactoryGirl.define do
   factory :phrase do
     text Faker::Lorem.words
