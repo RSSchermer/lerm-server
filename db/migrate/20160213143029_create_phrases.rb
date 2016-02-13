@@ -6,7 +6,7 @@ class CreatePhrases < ActiveRecord::Migration
       t.boolean :discarded
       t.boolean :crisp
       t.text :data_element_expression
-      t.references :rule, index: true, foreign_key: true
+      t.references :rule, index: true, foreign_key: true, null: false
 
       t.timestamps null: false
     end
