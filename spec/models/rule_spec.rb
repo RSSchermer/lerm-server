@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Project do
+describe Rule do
   let(:project) { FactoryGirl.create(:project) }
   subject(:rule) { FactoryGirl.build(:rule, project: project) }
 
