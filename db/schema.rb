@@ -11,11 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160213095857) do
+ActiveRecord::Schema.define(version: 20160213130146) do
 
   create_table "memberships", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "project_id"
+    t.integer  "user_id",    null: false
+    t.integer  "project_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -64,12 +64,26 @@ ActiveRecord::Schema.define(version: 20160213095857) do
   add_index "oauth_applications", ["uid"], name: "index_oauth_applications_on_uid", unique: true
 
   create_table "projects", force: :cascade do |t|
-    t.string   "name",       null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "name",        null: false
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   add_index "projects", ["name"], name: "index_projects_on_name", unique: true
+
+  create_table "rules", force: :cascade do |t|
+    t.string   "label",          null: false
+    t.string   "source"
+    t.text     "original_text"
+    t.text     "proactive_form"
+    t.integer  "project_id",     null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "rules", ["label"], name: "index_rules_on_label"
+  add_index "rules", ["project_id"], name: "index_rules_on_project_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
