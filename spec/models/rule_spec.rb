@@ -42,4 +42,28 @@ describe Rule do
 
     it { expect(rule).to_not be_valid }
   end
+
+  describe 'rule_conflicts' do
+    subject(:rule) { FactoryGirl.create(:rule, project: project) }
+    let(:other_rule) { FactoryGirl.create(:rule, project: project) }
+
+    context 'with outgoing conflicts' do
+      let!(:outgoing_conflict) { FactoryGirl.create(:rule_conflict, rule_1: rule, rule_2: other_rule) }
+
+      it { expect(rule.rule_conflicts).to contain_exactly(outgoing_conflict)}
+    end
+
+    context 'with incoming conflicts' do
+      let!(:incoming_conflict) { FactoryGirl.create(:rule_conflict, rule_1: other_rule, rule_2: rule) }
+
+      it { expect(rule.rule_conflicts).to contain_exactly(incoming_conflict)}
+    end
+
+    context 'with incoming and outgoing conflicts' do
+      let!(:outgoing_conflict) { FactoryGirl.create(:rule_conflict, rule_1: rule, rule_2: other_rule) }
+      let!(:incoming_conflict) { FactoryGirl.create(:rule_conflict, rule_1: other_rule, rule_2: rule) }
+
+      it { expect(rule.rule_conflicts).to contain_exactly(outgoing_conflict, incoming_conflict)}
+    end
+  end
 end
