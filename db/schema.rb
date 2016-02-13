@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160213130146) do
+ActiveRecord::Schema.define(version: 20160213143029) do
 
   create_table "memberships", force: :cascade do |t|
     t.integer  "user_id",    null: false
@@ -62,6 +62,19 @@ ActiveRecord::Schema.define(version: 20160213130146) do
   end
 
   add_index "oauth_applications", ["uid"], name: "index_oauth_applications_on_uid", unique: true
+
+  create_table "phrases", force: :cascade do |t|
+    t.string   "text"
+    t.string   "clean_text"
+    t.boolean  "discarded"
+    t.boolean  "crisp"
+    t.text     "data_element_expression"
+    t.integer  "rule_id"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "phrases", ["rule_id"], name: "index_phrases_on_rule_id"
 
   create_table "projects", force: :cascade do |t|
     t.string   "name",        null: false

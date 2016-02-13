@@ -6,6 +6,6 @@ FactoryGirl.define do
     source Faker::Lorem.word
     original_text Faker::Lorem.sentence
     proactive_form Faker::Lorem.sentence
-    project
+    project { create(:project) }
   end
 end
