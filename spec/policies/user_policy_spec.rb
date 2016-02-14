@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe User do
+describe UserPolicy do
   let(:user) { FactoryGirl.create(:user) }
 
   context 'unauthenticated user' do
