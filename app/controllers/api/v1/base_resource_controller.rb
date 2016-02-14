@@ -1,17 +1,13 @@
-module Api
-  module V1
-    class BaseResourceController < ActionController::Base
-      include JSONAPI::ActsAsResourceController
+class Api::V1::BaseResourceController < ActionController::Base
+  include JSONAPI::ActsAsResourceController
 
-      private
+  private
 
-      def current_user
-        User.find(doorkeeper_token.user_id) if doorkeeper_token
-      end
+  def current_user
+    User.find(doorkeeper_token.user_id) if doorkeeper_token
+  end
 
-      def context
-        { user: current_user }
-      end
-    end
+  def context
+    { user: current_user }
   end
 end

@@ -1,11 +1,7 @@
-module Api
-  module V1
-    class UserResource < BaseResource
-      immutable
+class Api::V1::UserResource < Api::V1::BaseResource
+  immutable
 
-      attribute :email
+  attribute :email
 
-      has_many :projects
-    end
-  end
+  has_many :projects
 end

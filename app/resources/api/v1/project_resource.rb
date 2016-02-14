@@ -1,9 +1,5 @@
-module Api
-  module V1
-    class ProjectResource < BaseResource
-      attribute :name
+class Api::V1::ProjectResource < Api::V1::BaseResource
+  attribute :name
 
-      has_many :members
-    end
-  end
+  has_many :members
 end
