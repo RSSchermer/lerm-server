@@ -66,4 +66,28 @@ describe Rule do
       it { expect(rule.rule_conflicts).to contain_exactly(outgoing_conflict, incoming_conflict)}
     end
   end
+
+  describe 'rule_relationships' do
+    subject(:rule) { FactoryGirl.create(:rule, project: project) }
+    let(:other_rule) { FactoryGirl.create(:rule, project: project) }
+
+    context 'with outgoing relationships' do
+      let!(:outgoing_relationship) { FactoryGirl.create(:rule_relationship, rule_1: rule, rule_2: other_rule) }
+
+      it { expect(rule.rule_relationships).to contain_exactly(outgoing_relationship)}
+    end
+
+    context 'with incoming relationships' do
+      let!(:incoming_relationship) { FactoryGirl.create(:rule_relationship, rule_1: other_rule, rule_2: rule) }
+
+      it { expect(rule.rule_relationships).to contain_exactly(incoming_relationship)}
+    end
+
+    context 'with incoming and outgoing relationships' do
+      let!(:outgoing_relationship) { FactoryGirl.create(:rule_relationship, rule_1: rule, rule_2: other_rule) }
+      let!(:incoming_relationship) { FactoryGirl.create(:rule_relationship, rule_1: other_rule, rule_2: rule) }
+
+      it { expect(rule.rule_relationships).to contain_exactly(outgoing_relationship, incoming_relationship)}
+    end
+  end
 end

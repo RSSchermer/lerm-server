@@ -6,6 +6,8 @@ class Rule < ActiveRecord::Base
   has_many :statements, dependent: :destroy
   has_many :outgoing_rule_conflicts, class_name: 'RuleConflict', foreign_key: :rule_1_id, dependent: :destroy
   has_many :incoming_rule_conflicts, class_name: 'RuleConflict', foreign_key: :rule_2_id, dependent: :destroy
+  has_many :outgoing_rule_relationships, class_name: 'RuleRelationship', foreign_key: :rule_1_id, dependent: :destroy
+  has_many :incoming_rule_relationships, class_name: 'RuleRelationship', foreign_key: :rule_2_id, dependent: :destroy
 
   validates :label, presence: true, uniqueness: { scope: :project }
   validates :original_text, presence: true
@@ -13,5 +15,9 @@ class Rule < ActiveRecord::Base
 
   def rule_conflicts
     incoming_rule_conflicts + outgoing_rule_conflicts
+  end
+
+  def rule_relationships
+    incoming_rule_relationships + outgoing_rule_relationships
   end
 end

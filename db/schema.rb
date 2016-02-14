@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160213204311) do
+ActiveRecord::Schema.define(version: 20160214090457) do
 
   create_table "memberships", force: :cascade do |t|
     t.integer  "user_id",    null: false
@@ -95,6 +95,17 @@ ActiveRecord::Schema.define(version: 20160213204311) do
 
   add_index "rule_conflicts", ["rule_1_id"], name: "index_rule_conflicts_on_rule_1_id"
   add_index "rule_conflicts", ["rule_2_id"], name: "index_rule_conflicts_on_rule_2_id"
+
+  create_table "rule_relationships", force: :cascade do |t|
+    t.integer  "rule_1_id"
+    t.integer  "rule_2_id"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "rule_relationships", ["rule_1_id"], name: "index_rule_relationships_on_rule_1_id"
+  add_index "rule_relationships", ["rule_2_id"], name: "index_rule_relationships_on_rule_2_id"
 
   create_table "rules", force: :cascade do |t|
     t.string   "label",          null: false
