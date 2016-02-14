@@ -1,8 +1,8 @@
 class CreateRuleRelationships < ActiveRecord::Migration
   def change
     create_table :rule_relationships do |t|
-      t.integer :rule_1_id, index: true
-      t.integer :rule_2_id, index: true
+      t.integer :rule_1_id, index: true, null: false
+      t.integer :rule_2_id, index: true, null: false
       t.text :description
 
       t.timestamps null: false

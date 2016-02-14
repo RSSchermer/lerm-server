@@ -1,8 +1,8 @@
 class CreateStatements < ActiveRecord::Migration
   def change
     create_table :statements do |t|
-      t.text :condition
-      t.text :consequence
+      t.text :condition, null: false
+      t.text :consequence, null: false
       t.text :cleaned_condition
       t.text :cleaned_consequence
       t.boolean :discarded, default: false
