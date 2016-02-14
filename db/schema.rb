@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160214090457) do
+ActiveRecord::Schema.define(version: 20160214093139) do
+
+  create_table "data_elements", force: :cascade do |t|
+    t.string   "label",       null: false
+    t.text     "description"
+    t.integer  "project_id",  null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "data_elements", ["label"], name: "index_data_elements_on_label"
+  add_index "data_elements", ["project_id"], name: "index_data_elements_on_project_id"
 
   create_table "memberships", force: :cascade do |t|
     t.integer  "user_id",    null: false
@@ -64,7 +75,7 @@ ActiveRecord::Schema.define(version: 20160214090457) do
   add_index "oauth_applications", ["uid"], name: "index_oauth_applications_on_uid", unique: true
 
   create_table "phrases", force: :cascade do |t|
-    t.string   "text"
+    t.string   "text",                    null: false
     t.string   "clean_text"
     t.boolean  "discarded"
     t.boolean  "crisp"
@@ -86,8 +97,8 @@ ActiveRecord::Schema.define(version: 20160214090457) do
   add_index "projects", ["name"], name: "index_projects_on_name", unique: true
 
   create_table "rule_conflicts", force: :cascade do |t|
-    t.integer  "rule_1_id"
-    t.integer  "rule_2_id"
+    t.integer  "rule_1_id",   null: false
+    t.integer  "rule_2_id",   null: false
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
@@ -97,8 +108,8 @@ ActiveRecord::Schema.define(version: 20160214090457) do
   add_index "rule_conflicts", ["rule_2_id"], name: "index_rule_conflicts_on_rule_2_id"
 
   create_table "rule_relationships", force: :cascade do |t|
-    t.integer  "rule_1_id"
-    t.integer  "rule_2_id"
+    t.integer  "rule_1_id",   null: false
+    t.integer  "rule_2_id",   null: false
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
@@ -121,8 +132,8 @@ ActiveRecord::Schema.define(version: 20160214090457) do
   add_index "rules", ["project_id"], name: "index_rules_on_project_id"
 
   create_table "statements", force: :cascade do |t|
-    t.text     "condition"
-    t.text     "consequence"
+    t.text     "condition",                           null: false
+    t.text     "consequence",                         null: false
     t.text     "cleaned_condition"
     t.text     "cleaned_consequence"
     t.boolean  "discarded",           default: false
