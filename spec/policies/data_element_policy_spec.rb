@@ -6,7 +6,7 @@ describe DataElementPolicy do
 
   context 'unauthenticated user' do
     let(:user) { nil }
-    subject(:policy) { RulePolicy.new(user, data_element) }
+    subject(:policy) { DataElementPolicy.new(user, data_element) }
 
     describe 'index?' do
       it { expect(policy.index?).to be_truthy }
@@ -31,7 +31,7 @@ describe DataElementPolicy do
 
   context 'normal user that is not a data_element member' do
     let(:user) { FactoryGirl.create(:user) }
-    subject(:policy) { RulePolicy.new(user, data_element) }
+    subject(:policy) { DataElementPolicy.new(user, data_element) }
 
     describe 'index?' do
       it { expect(policy.index?).to be_truthy }
@@ -56,7 +56,7 @@ describe DataElementPolicy do
 
   context 'normal user that is a data_element member' do
     let(:user) { FactoryGirl.create(:user) }
-    subject(:policy) { RulePolicy.new(user, data_element) }
+    subject(:policy) { DataElementPolicy.new(user, data_element) }
 
     before { FactoryGirl.create(:membership, user: user, project: project)}
 
@@ -83,7 +83,7 @@ describe DataElementPolicy do
 
   context 'super admin user' do
     let(:user) { FactoryGirl.create(:super_admin) }
-    subject(:policy) { RulePolicy.new(user, data_element) }
+    subject(:policy) { DataElementPolicy.new(user, data_element) }
 
     describe 'index?' do
       it { expect(policy.index?).to be_truthy }
