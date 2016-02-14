@@ -29,7 +29,7 @@ describe RulePolicy do
     end
   end
 
-  context 'normal user that is not a rule member' do
+  context 'normal user that is not a project member' do
     let(:user) { FactoryGirl.create(:user) }
     subject(:policy) { RulePolicy.new(user, rule) }
 
@@ -54,7 +54,7 @@ describe RulePolicy do
     end
   end
 
-  context 'normal user that is a rule member' do
+  context 'normal user that is a project member' do
     let(:user) { FactoryGirl.create(:user) }
     subject(:policy) { RulePolicy.new(user, rule) }
 
