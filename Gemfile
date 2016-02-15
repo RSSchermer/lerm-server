@@ -20,6 +20,7 @@ gem 'pundit'
 gem 'jsonapi-resources'
 gem 'jsonapi-authorization'
 gem 'doorkeeper'
+gem 'rack-cors', :require => 'rack/cors'
 
 # CSS
 gem 'sass-rails', '~> 5.0'
