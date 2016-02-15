@@ -18,7 +18,7 @@ class DataElementPolicy < ApplicationPolicy
   end
 
   def manage?
-    !user.nil? && (user.super_admin? || user.project_member?(data_element.project_id))
+    ProjectPolicy.new(user, data_element.project).update?
   end
 
   def update?

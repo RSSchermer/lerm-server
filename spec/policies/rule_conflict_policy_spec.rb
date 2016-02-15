@@ -2,8 +2,9 @@ require 'rails_helper'
 
 describe RuleConflictPolicy do
   let(:project) { FactoryGirl.create(:project) }
-  let(:rule) { FactoryGirl.create(:rule, project: project) }
-  let(:rule_conflict) { FactoryGirl.create(:rule_conflict, rule_1: rule) }
+  let(:rule_1) { FactoryGirl.create(:rule, project: project) }
+  let(:rule_2) { FactoryGirl.create(:rule, project: project) }
+  let(:rule_conflict) { FactoryGirl.create(:rule_conflict, rule_1: rule_1, rule_2: rule_2) }
 
   context 'unauthenticated user' do
     let(:user) { nil }

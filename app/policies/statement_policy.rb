@@ -18,7 +18,7 @@ class StatementPolicy < ApplicationPolicy
   end
 
   def manage?
-    !user.nil? && (user.super_admin? || user.project_member?(statement.rule.project_id))
+    RulePolicy.new(user, statement.rule).update?
   end
 
   def update?

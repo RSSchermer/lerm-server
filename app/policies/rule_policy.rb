@@ -18,7 +18,7 @@ class RulePolicy < ApplicationPolicy
   end
 
   def manage?
-    !user.nil? && (user.super_admin? || user.project_member?(rule.project_id))
+    ProjectPolicy.new(user, rule.project).update?
   end
 
   def update?
