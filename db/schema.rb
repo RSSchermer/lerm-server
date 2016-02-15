@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(version: 20160214102030) do
 
   create_table "phrases", force: :cascade do |t|
     t.string   "text",                    null: false
-    t.string   "clean_text"
+    t.string   "cleaned_text"
     t.boolean  "discarded"
     t.boolean  "crisp"
     t.text     "data_element_expression"

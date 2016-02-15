@@ -2,7 +2,7 @@ class CreatePhrases < ActiveRecord::Migration
   def change
     create_table :phrases do |t|
       t.string :text, null: false
-      t.string :clean_text
+      t.string :cleaned_text
       t.boolean :discarded
       t.boolean :crisp
       t.text :data_element_expression
