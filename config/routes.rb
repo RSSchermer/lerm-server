@@ -7,6 +7,12 @@ Rails.application.routes.draw do
 
     jsonapi_resources :users
     jsonapi_resources :projects
+    jsonapi_resources :rules
+    jsonapi_resources :data_elements
+    jsonapi_resources :phrases
+    jsonapi_resources :statements
+    jsonapi_resources :rule_conflicts
+    jsonapi_resources :rule_relationships
   end
 
   root to: 'static_pages#index'
