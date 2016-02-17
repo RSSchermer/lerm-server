@@ -7,6 +7,31 @@ describe User do
     expect(user).to be_valid
   end
 
+  context 'without a username' do
+    before { user.username = nil }
+
+    it { expect(user).to_not be_valid }
+  end
+
+  context 'with a non-unique username (case insensitive)' do
+    before { FactoryGirl.create(:user, username: 'Username') }
+    before { user.username = 'username' }
+
+    it { expect(user).to_not be_valid }
+  end
+
+  context 'with a username that contains spaces' do
+    before { user.username = 'user name' }
+
+    it { expect(user).to_not be_valid }
+  end
+
+  context 'with a username that contains symbols' do
+    before { user.username = 'user%name' }
+
+    it { expect(user).to_not be_valid }
+  end
+
   describe 'project_member?' do
     let(:project) { FactoryGirl.create(:project) }
 

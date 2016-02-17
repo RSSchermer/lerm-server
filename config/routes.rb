@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   use_doorkeeper
-  devise_for :users
+  devise_for :users, controllers: { registrations: :registrations }
 
   scope 'api/v1', module: 'api/v1' do
     jsonapi_resource :current_user

@@ -5,6 +5,9 @@
 
   = f.inputs do
     = f.input :email, input_html: { autofocus: true }
+    = f.input :username, hint: 'Must consist of only letters, numbers, dashes and underscores'
+    = f.input :first_name
+    = f.input :last_name
     = f.input :password
     = f.input :password_confirmation
 
