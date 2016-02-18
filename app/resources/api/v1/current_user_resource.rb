@@ -11,6 +11,6 @@ class Api::V1::CurrentUserResource < Api::V1::UserResource
   end
 
   def self._type
-    'users'
+    'user'
   end
 end
