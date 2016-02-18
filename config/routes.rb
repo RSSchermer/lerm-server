@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
     jsonapi_resources :users
     jsonapi_resources :projects
+    jsonapi_resources :memberships
     jsonapi_resources :rules
     jsonapi_resources :data_elements
     jsonapi_resources :phrases
