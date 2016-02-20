@@ -1,5 +1,5 @@
 class Api::V1::ProjectResource < Api::V1::BaseResource
-  attributes :name, :description
+  attributes :name, :description, :rule_id
 
   has_many :memberships
 
