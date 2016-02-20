@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :membership do
-    user nil
-    project nil
+    user { FactoryGirl.create(:user) }
+    project { FactoryGirl.create(:project) }
   end
 end
