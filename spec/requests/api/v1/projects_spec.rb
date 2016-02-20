@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'CurrentUser requests', type: :request do
+describe 'Projects requests', type: :request do
   let(:user) { FactoryGirl.create(:user) }
   let(:project) { FactoryGirl.create(:project) }
 
