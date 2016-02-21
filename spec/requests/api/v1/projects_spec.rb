@@ -66,107 +66,88 @@ describe 'Projects requests', type: :request do
         AUTHORIZATION: "Bearer #{token.token}"
     } }
 
-    context 'the current user is not a project member' do
-      describe 'GET api/v1/projects' do
-        before { get '/api/v1/projects', {}, headers }
+    describe 'GET api/v1/projects' do
+      before { get '/api/v1/projects', {}, headers }
 
-        it { expect(response.status).to eql(200) }
-      end
+      it { expect(response.status).to eql(200) }
+    end
 
-      describe 'GET api/v1/projects/:project_id' do
-        before { get "/api/v1/projects/#{project.id}", {}, headers }
+    describe 'POST api/v1/projects' do
+      context 'with valid data' do
+        let(:json) { {
+            data: {
+                type: 'projects',
+                attributes: FactoryGirl.attributes_for(:project)
+            }
+        }.to_json }
 
-        it { expect(response.status).to eql(200) }
-      end
+        before { post '/api/v1/projects', json, headers }
 
-      describe 'POST api/v1/projects' do
-        context 'with valid data' do
-          let(:json) { {
-              data: {
-                  type: 'projects',
-                  attributes: FactoryGirl.attributes_for(:project)
-              }
-          }.to_json }
-
-          before { post '/api/v1/projects', json, headers }
-
-          it { expect(response.status).to eql(201) }
-        end
-      end
-
-      describe 'PUT api/v1/projects/:project_id' do
-        context 'with valid data' do
-          let(:json) { {
-              data: {
-                  type: 'projects',
-                  id: project.id.to_s,
-                  attributes: FactoryGirl.attributes_for(:project)
-              }
-          }.to_json }
-
-          before { put "/api/v1/projects/#{project.id}", json, headers }
-
-          it { expect(response.status).to eql(401) }
-        end
-      end
-
-      describe 'DELETE api/v1/projects/:project_id' do
-        before { delete "/api/v1/projects/#{project.id}", {}, headers }
-
-        it { expect(response.status).to eql(405) }
+        it { expect(response.status).to eql(201) }
       end
     end
 
-    context 'the current user is a project member' do
-      before { FactoryGirl.create(:membership, project: project, user: user) }
-
-      describe 'GET api/v1/projects' do
-        before { get '/api/v1/projects', {}, headers }
-
-        it { expect(response.status).to eql(200) }
-      end
-
-      describe 'GET api/v1/projects/:project_id' do
-        before { get "/api/v1/projects/#{project.id}", {}, headers }
-
-        it { expect(response.status).to eql(200) }
-      end
-
-      describe 'POST api/v1/projects' do
-        context 'with valid data' do
-          let(:json) { {
-              data: {
-                  type: 'projects',
-                  attributes: FactoryGirl.attributes_for(:project)
-              }
-          }.to_json }
-
-          before { post '/api/v1/projects', json, headers }
-
-          it { expect(response.status).to eql(201) }
-        end
-      end
-
-      describe 'PUT api/v1/projects/:project_id' do
-        context 'with valid data' do
-          let(:json) { {
-              data: {
-                  type: 'projects',
-                  id: project.id.to_s,
-                  attributes: FactoryGirl.attributes_for(:project)
-              }
-          }.to_json }
-
-          before { put "/api/v1/projects/#{project.id}", json, headers }
+    describe 'request methods that concern a single rule' do
+      context 'the current user is not a project member' do
+        describe 'GET api/v1/projects/:project_id' do
+          before { get "/api/v1/projects/#{project.id}", {}, headers }
 
           it { expect(response.status).to eql(200) }
         end
+
+        describe 'PUT api/v1/projects/:project_id' do
+          context 'with valid data' do
+            let(:json) { {
+                data: {
+                    type: 'projects',
+                    id: project.id.to_s,
+                    attributes: FactoryGirl.attributes_for(:project)
+                }
+            }.to_json }
+
+            before { put "/api/v1/projects/#{project.id}", json, headers }
+
+            it { expect(response.status).to eql(401) }
+          end
+        end
+
+        describe 'DELETE api/v1/projects/:project_id' do
+          before { delete "/api/v1/projects/#{project.id}", {}, headers }
+
+          it { expect(response.status).to eql(405) }
+        end
       end
 
-      describe 'DELETE api/v1/projects/:project_id' do
-        before { delete "/api/v1/projects/#{project.id}", {}, headers }
+      context 'the current user is a project member' do
+        before { FactoryGirl.create(:membership, project: project, user: user) }
 
-        it { expect(response.status).to eql(405) }
+        describe 'GET api/v1/projects/:project_id' do
+          before { get "/api/v1/projects/#{project.id}", {}, headers }
+
+          it { expect(response.status).to eql(200) }
+        end
+
+        describe 'PUT api/v1/projects/:project_id' do
+          context 'with valid data' do
+            let(:json) { {
+                data: {
+                    type: 'projects',
+                    id: project.id.to_s,
+                    attributes: FactoryGirl.attributes_for(:project)
+                }
+            }.to_json }
+
+            before { put "/api/v1/projects/#{project.id}", json, headers }
+
+            it { expect(response.status).to eql(200) }
+          end
+        end
+
+        describe 'DELETE api/v1/projects/:project_id' do
+          before { delete "/api/v1/projects/#{project.id}", {}, headers }
+
+          it { expect(response.status).to eql(405) }
+        end
       end
     end
   end
