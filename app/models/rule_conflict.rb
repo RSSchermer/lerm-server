@@ -1,8 +1,10 @@
 class RuleConflict < ActiveRecord::Base
   belongs_to :rule_1, class_name: 'Rule'
   belongs_to :rule_2, class_name: 'Rule'
+  belongs_to :project
 
   validates :rule_1_id, presence: true
   validates :rule_2_id, presence: true
   validates :description, presence: true
+  validates :project_id, presence: true
 end

@@ -4,6 +4,7 @@ class CreateRuleRelationships < ActiveRecord::Migration
       t.integer :rule_1_id, index: true, null: false
       t.integer :rule_2_id, index: true, null: false
       t.text :description
+      t.references :project, index: true, foreign_key: true, null: false
 
       t.timestamps null: false
     end

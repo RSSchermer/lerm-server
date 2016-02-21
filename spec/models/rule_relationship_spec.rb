@@ -24,4 +24,10 @@ describe RuleRelationship do
 
     it { expect(rule_relationship).to_not be_valid }
   end
+
+  context 'without a project' do
+    before { rule_relationship.project = nil }
+
+    it { expect(rule_relationship).to_not be_valid }
+  end
 end

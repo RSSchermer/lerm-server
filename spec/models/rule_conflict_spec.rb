@@ -24,4 +24,10 @@ describe RuleConflict do
 
     it { expect(rule_conflict).to_not be_valid }
   end
+
+  context 'without a project' do
+    before { rule_conflict.project = nil }
+
+    it { expect(rule_conflict).to_not be_valid }
+  end
 end

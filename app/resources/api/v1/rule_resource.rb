@@ -4,6 +4,4 @@ class Api::V1::RuleResource < Api::V1::BaseResource
   has_one :project
   has_many :phrases
   has_many :statements
-  has_many :rule_conflicts
-  has_many :rule_relationships
 end

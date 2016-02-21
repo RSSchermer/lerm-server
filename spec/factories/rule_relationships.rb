@@ -3,5 +3,6 @@ FactoryGirl.define do
     rule_1 { create(:rule) }
     rule_2 { create(:rule) }
     description { Faker::Lorem::sentences }
+    project { create(:project) }
   end
 end

@@ -18,7 +18,7 @@ class RuleRelationshipPolicy < ApplicationPolicy
   end
 
   def manage?
-    RulePolicy.new(user, rule_relationship.rule_1).update? && RulePolicy.new(user, rule_relationship.rule_2).update?
+    ProjectPolicy.new(user, rule_relationship.project).update?
   end
 
   def update?

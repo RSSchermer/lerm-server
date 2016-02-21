@@ -9,7 +9,7 @@ class Api::V1::RuleRelationshipsController < Api::V1::BaseResourceController
   private
 
   def authorize_create
-    rule = Rule.find(params[:data][:attributes]['rule-1-id'])
-    raise Pundit::NotAuthorizedError unless RulePolicy.new(context[:user], rule).update?
+    project = Project.find(params[:data][:attributes]['project-id'])
+    raise Pundit::NotAuthorizedError unless ProjectPolicy.new(context[:user], project).update?
   end
 end

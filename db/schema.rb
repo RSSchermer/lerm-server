@@ -107,10 +107,12 @@ ActiveRecord::Schema.define(version: 20160214102030) do
     t.integer  "rule_1_id",   null: false
     t.integer  "rule_2_id",   null: false
     t.text     "description"
+    t.integer  "project_id",  null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
+  add_index "rule_conflicts", ["project_id"], name: "index_rule_conflicts_on_project_id"
   add_index "rule_conflicts", ["rule_1_id"], name: "index_rule_conflicts_on_rule_1_id"
   add_index "rule_conflicts", ["rule_2_id"], name: "index_rule_conflicts_on_rule_2_id"
 
@@ -118,10 +120,12 @@ ActiveRecord::Schema.define(version: 20160214102030) do
     t.integer  "rule_1_id",   null: false
     t.integer  "rule_2_id",   null: false
     t.text     "description"
+    t.integer  "project_id",  null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
+  add_index "rule_relationships", ["project_id"], name: "index_rule_relationships_on_project_id"
   add_index "rule_relationships", ["rule_1_id"], name: "index_rule_relationships_on_rule_1_id"
   add_index "rule_relationships", ["rule_2_id"], name: "index_rule_relationships_on_rule_2_id"
 

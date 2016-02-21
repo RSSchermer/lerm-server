@@ -4,7 +4,7 @@ describe RuleRelationshipPolicy do
   let(:project) { FactoryGirl.create(:project) }
   let(:rule_1) { FactoryGirl.create(:rule, project: project) }
   let(:rule_2) { FactoryGirl.create(:rule, project: project) }
-  let(:rule_relationship) { FactoryGirl.create(:rule_relationship, rule_1: rule_1, rule_2: rule_2) }
+  let(:rule_relationship) { FactoryGirl.create(:rule_relationship, rule_1: rule_1, rule_2: rule_2, project: project) }
 
   context 'unauthenticated user' do
     let(:user) { nil }
