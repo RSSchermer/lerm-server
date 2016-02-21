@@ -2,6 +2,8 @@ class Api::V1::ProjectResource < Api::V1::BaseResource
   attributes :name, :description
 
   has_many :memberships
+  has_many :rules
+  has_many :data_elements
   has_many :rule_conflicts
   has_many :rule_relationships
 
