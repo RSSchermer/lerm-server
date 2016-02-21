@@ -3,5 +3,5 @@ class Statement < ActiveRecord::Base
 
   validates :condition, presence: true
   validates :consequence, presence: true
-  validates :rule, presence: true
+  validates :rule_id, presence: true
 end

@@ -35,6 +35,8 @@ describe User do
   describe 'project_member?' do
     let(:project) { FactoryGirl.create(:project) }
 
+    before { user.save }
+
     context 'the user is not a project member' do
       it { expect(user.project_member?(project)).to be_falsey }
     end
