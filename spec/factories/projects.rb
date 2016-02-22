@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :project do
-    name { Faker::Name.name }
+    sequence(:name) { |n| "Project #{n}" }
   end
 end
