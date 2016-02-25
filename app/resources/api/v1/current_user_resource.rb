@@ -9,8 +9,4 @@ class Api::V1::CurrentUserResource < Api::V1::UserResource
     fail JSONAPI::Exceptions::RecordNotFound.new(key) if user.nil?
     self.resource_for_model(user).new(user, context)
   end
-
-  def self._type
-    'user'
-  end
 end
