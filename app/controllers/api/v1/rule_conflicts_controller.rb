@@ -10,6 +10,6 @@ class Api::V1::RuleConflictsController < Api::V1::BaseResourceController
 
   def authorize_create
     project = Project.find(params[:data][:attributes]['project-id'])
-    raise Pundit::NotAuthorizedError unless ProjectPolicy.new(context[:user], project).update?
+    raise Pundit::NotAuthorizedError unless ProjectPolicy.new(current_user, project).update?
   end
 end

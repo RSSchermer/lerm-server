@@ -10,6 +10,6 @@ class Api::V1::PhrasesController < Api::V1::BaseResourceController
 
   def authorize_create
     rule = Rule.find(params[:data][:attributes]['rule-id'])
-    raise Pundit::NotAuthorizedError unless RulePolicy.new(context[:user], rule).update?
+    raise Pundit::NotAuthorizedError unless RulePolicy.new(current_user, rule).update?
   end
 end
