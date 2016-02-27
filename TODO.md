@@ -1,6 +1,5 @@
 # TODO List
 
-- Find cleaner way to implement CurrentUserResource as singleton (upstream?).
 - Find cleaner way to authorize the creation of resources that belong to a 
   project, see rule, data element, rule conflict, rule relationship, membership,
   phrase and statement controllers (upstream?).
