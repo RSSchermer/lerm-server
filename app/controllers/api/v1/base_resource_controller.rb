@@ -14,8 +14,12 @@ class Api::V1::BaseResourceController < ActionController::Base
     end
   end
 
-  def reject_forbidden_request
-    head :forbidden
+  def reject_forbidden_request(e)
+    render json: { errors: [{
+        status: '403',
+        title: 'Forbidden',
+        detail: "The current user is not allowed to #{e.query} this #{e.record.class.name} (id: #{e.record.id})",
+    }] }, status: :forbidden
   end
 
   def current_user
