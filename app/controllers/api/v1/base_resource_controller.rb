@@ -18,7 +18,7 @@ class Api::V1::BaseResourceController < ActionController::Base
     render json: { errors: [{
         status: '403',
         title: 'Forbidden',
-        detail: "The current user is not allowed to #{e.query} this #{e.record.class.name} (id: #{e.record.id})",
+        detail: "The current user is not allowed to #{e.query} (this instance of) the #{e.record.class.name} resource",
     }] }, status: :forbidden
   end
 
