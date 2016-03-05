@@ -15,7 +15,7 @@ class Api::V1::BaseResourceController < ActionController::Base
   end
 
   def reject_forbidden_request
-    head :unauthorized
+    head :forbidden
   end
 
   def current_user
