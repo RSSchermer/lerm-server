@@ -1,5 +1,5 @@
 class Api::V1::DataElementResource < Api::V1::BaseResource
-  attributes :label, :description, :project_id
+  attributes :label, :description
 
   has_one :project
   has_many :phrases

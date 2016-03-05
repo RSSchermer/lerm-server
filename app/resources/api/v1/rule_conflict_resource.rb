@@ -1,5 +1,5 @@
 class Api::V1::RuleConflictResource < Api::V1::BaseResource
-  attributes :description, :rule_1_id, :rule_2_id, :project_id
+  attributes :description
 
   has_one :rule_1
   has_one :rule_2
