@@ -4,13 +4,23 @@ describe 'Phrases requests', type: :request do
   let(:user) { FactoryGirl.create(:user) }
   let(:project) { FactoryGirl.create(:project) }
   let(:rule) { FactoryGirl.create(:rule, project: project)}
-  let(:phrase) { FactoryGirl.create(:phrase, rule: rule) }
 
-  def create_valid_phrase_attributes(owner_rule)
-    {
-        'text' => Faker::Lorem.word,
-        'rule-id' => owner_rule.id.to_s
+  def create_valid_phrase_json(owner_rule, id = nil)
+    valid_data = {
+        data: {
+            type: 'phrases',
+            attributes: {
+                text: Faker::Lorem.word
+            },
+            relationships: {
+                rule: { data: { type: 'rules', id: owner_rule.id.to_s } }
+            }
+        }
     }
+
+    valid_data[:data][:id] = id.to_s unless id.nil?
+
+    valid_data.to_json
   end
 
   context 'without a valid OAuth token' do
@@ -21,23 +31,12 @@ describe 'Phrases requests', type: :request do
     describe 'GET api/v1/phrases' do
       before { get '/api/v1/phrases', {}, headers }
 
-      it { expect(response.status).to eql(401) }
-    end
-
-    describe 'GET api/v1/phrases/:phrase_id' do
-      before { get "/api/v1/phrases/#{phrase.id}", {}, headers }
-
-      it { expect(response.status).to eql(200) }
+      it { expect(response.status).to eql(403) }
     end
 
     describe 'POST api/v1/phrases' do
       context 'with valid data' do
-        let(:json) { {
-            data: {
-                type: 'phrases',
-                attributes: create_valid_phrase_attributes(rule)
-            }
-        }.to_json }
+        let(:json) { create_valid_phrase_json(rule) }
 
         before { post '/api/v1/phrases', json, headers }
 
@@ -45,26 +44,30 @@ describe 'Phrases requests', type: :request do
       end
     end
 
-    describe 'PUT api/v1/phrases/:phrase_id' do
-      context 'with valid data' do
-        let(:json) { {
-            data: {
-                type: 'phrases',
-                id: phrase.id.to_s,
-                attributes: create_valid_phrase_attributes(rule)
-            }
-        }.to_json }
+    describe 'requests that concern a specific instance' do
+      let(:phrase) { FactoryGirl.create(:phrase, rule: rule) }
 
-        before { put "/api/v1/phrases/#{phrase.id}", json, headers }
+      describe 'GET api/v1/phrases/:phrase_id' do
+        before { get "/api/v1/phrases/#{phrase.id}", {}, headers }
+
+        it { expect(response.status).to eql(200) }
+      end
+
+      describe 'PUT api/v1/phrases/:phrase_id' do
+        context 'with valid data' do
+          let(:json) { create_valid_phrase_json(rule, phrase.id) }
+
+          before { put "/api/v1/phrases/#{phrase.id}", json, headers }
+
+          it { expect(response.status).to eql(401) }
+        end
+      end
+
+      describe 'DELETE api/v1/phrases/:phrase_id' do
+        before { delete "/api/v1/phrases/#{phrase.id}", {}, headers }
 
         it { expect(response.status).to eql(401) }
       end
-    end
-
-    describe 'DELETE api/v1/phrases/:phrase_id' do
-      before { delete "/api/v1/phrases/#{phrase.id}", {}, headers }
-
-      it { expect(response.status).to eql(401) }
     end
   end
 
@@ -78,7 +81,7 @@ describe 'Phrases requests', type: :request do
     describe 'GET api/v1/phrases' do
       before { get '/api/v1/phrases', {}, headers }
 
-      it { expect(response.status).to eql(401) }
+      it { expect(response.status).to eql(403) }
     end
 
     describe 'POST api/v1/phrases' do
@@ -86,25 +89,15 @@ describe 'Phrases requests', type: :request do
 
       context 'with valid data for a new phrase for a project the user is not a member of' do
         let(:other_rule) { FactoryGirl.create(:rule) }
-        let(:json) { {
-            data: {
-                type: 'phrases',
-                attributes: create_valid_phrase_attributes(other_rule)
-            }
-        }.to_json }
+        let(:json) { create_valid_phrase_json(other_rule) }
 
         before { post '/api/v1/phrases', json, headers }
 
-        it { expect(response.status).to eql(401) }
+        it { expect(response.status).to eql(403) }
       end
 
       context 'with valid data for a new phrase for a project the user is a member of' do
-        let(:json) { {
-            data: {
-                type: 'phrases',
-                attributes: create_valid_phrase_attributes(rule)
-            }
-        }.to_json }
+        let(:json) { create_valid_phrase_json(rule) }
 
         before { post '/api/v1/phrases', json, headers }
 
@@ -112,7 +105,9 @@ describe 'Phrases requests', type: :request do
       end
     end
 
-    describe 'request methods that concern a single phrase' do
+    describe 'requests that concern a specific instance' do
+      let(:phrase) { FactoryGirl.create(:phrase, rule: rule) }
+
       context 'the current user is not a member of the project the phrase belongs to' do
         describe 'GET api/v1/phrases/:phrase_id' do
           before { get "/api/v1/phrases/#{phrase.id}", {}, headers }
@@ -122,24 +117,18 @@ describe 'Phrases requests', type: :request do
 
         describe 'PUT api/v1/phrases/:phrase_id' do
           context 'with valid data' do
-            let(:json) { {
-                data: {
-                    type: 'phrases',
-                    id: phrase.id.to_s,
-                    attributes: create_valid_phrase_attributes(rule)
-                }
-            }.to_json }
+            let(:json) { create_valid_phrase_json(rule, phrase.id) }
 
             before { put "/api/v1/phrases/#{phrase.id}", json, headers }
 
-            it { expect(response.status).to eql(401) }
+            it { expect(response.status).to eql(403) }
           end
         end
 
         describe 'DELETE api/v1/phrases/:phrase_id' do
           before { delete "/api/v1/phrases/#{phrase.id}", {}, headers }
 
-          it { expect(response.status).to eql(401) }
+          it { expect(response.status).to eql(403) }
         end
       end
 
@@ -154,13 +143,7 @@ describe 'Phrases requests', type: :request do
 
         describe 'PUT api/v1/phrases/:phrase_id' do
           context 'with valid data' do
-            let(:json) { {
-                data: {
-                    type: 'phrases',
-                    id: phrase.id.to_s,
-                    attributes: create_valid_phrase_attributes(rule)
-                }
-            }.to_json }
+            let(:json) { create_valid_phrase_json(rule, phrase.id) }
 
             before { put "/api/v1/phrases/#{phrase.id}", json, headers }
 

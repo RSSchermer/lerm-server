@@ -2,7 +2,6 @@ require 'rails_helper'
 
 describe 'Users requests', type: :request do
   let(:current_user) { FactoryGirl.create(:user) }
-  let(:user) { FactoryGirl.create(:user) }
 
   context 'without a valid OAuth token' do
     let(:headers) { {
@@ -15,10 +14,14 @@ describe 'Users requests', type: :request do
       it { expect(response.status).to eql(200) }
     end
 
-    describe 'GET api/v1/users/:user_id' do
-      before { get "/api/v1/users/#{user.id}", {}, headers }
+    describe 'requests that concern a specific instance' do
+      let(:user) { FactoryGirl.create(:user) }
 
-      it { expect(response.status).to eql(200) }
+      describe 'GET api/v1/users/:user_id' do
+        before { get "/api/v1/users/#{user.id}", {}, headers }
+
+        it { expect(response.status).to eql(200) }
+      end
     end
   end
 
@@ -35,10 +38,14 @@ describe 'Users requests', type: :request do
       it { expect(response.status).to eql(200) }
     end
 
-    describe 'GET api/v1/users/:user_id' do
-      before { get "/api/v1/users/#{user.id}", {}, headers }
+    describe 'requests that concern a specific instance' do
+      let(:user) { FactoryGirl.create(:user) }
 
-      it { expect(response.status).to eql(200) }
+      describe 'GET api/v1/users/:user_id' do
+        before { get "/api/v1/users/#{user.id}", {}, headers }
+
+        it { expect(response.status).to eql(200) }
+      end
     end
   end
 end

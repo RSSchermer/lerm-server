@@ -2,7 +2,19 @@ require 'rails_helper'
 
 describe 'Projects requests', type: :request do
   let(:user) { FactoryGirl.create(:user) }
-  let(:project) { FactoryGirl.create(:project) }
+
+  def create_valid_project_json(id = nil)
+    valid_data = {
+        data: {
+            type: 'projects',
+            attributes: FactoryGirl.attributes_for(:project)
+        }
+    }
+
+    valid_data[:data][:id] = id.to_s unless id.nil?
+
+    valid_data.to_json
+  end
 
   context 'without a valid OAuth token' do
     let(:headers) { {
@@ -15,20 +27,9 @@ describe 'Projects requests', type: :request do
       it { expect(response.status).to eql(200) }
     end
 
-    describe 'GET api/v1/projects/:project_id' do
-      before { get "/api/v1/projects/#{project.id}", {}, headers }
-
-      it { expect(response.status).to eql(200) }
-    end
-
     describe 'POST api/v1/projects' do
       context 'with valid data' do
-        let(:json) { {
-            data: {
-                type: 'projects',
-                attributes: FactoryGirl.attributes_for(:project)
-            }
-        }.to_json }
+        let(:json) { create_valid_project_json }
 
         before { post '/api/v1/projects', json, headers }
 
@@ -36,26 +37,30 @@ describe 'Projects requests', type: :request do
       end
     end
 
-    describe 'PUT api/v1/projects/:project_id' do
-      context 'with valid data' do
-        let(:json) { {
-            data: {
-                type: 'projects',
-                id: project.id.to_s,
-                attributes: FactoryGirl.attributes_for(:project)
-            }
-        }.to_json }
+    describe 'requests that concern a specific instance' do
+      let(:project) { FactoryGirl.create(:project) }
 
-        before { put "/api/v1/projects/#{project.id}", json, headers }
+      describe 'GET api/v1/projects/:project_id' do
+        before { get "/api/v1/projects/#{project.id}", {}, headers }
+
+        it { expect(response.status).to eql(200) }
+      end
+
+      describe 'PUT api/v1/projects/:project_id' do
+        context 'with valid data' do
+          let(:json) { create_valid_project_json(project.id) }
+
+          before { put "/api/v1/projects/#{project.id}", json, headers }
+
+          it { expect(response.status).to eql(401) }
+        end
+      end
+
+      describe 'DELETE api/v1/projects/:project_id' do
+        before { delete "/api/v1/projects/#{project.id}", {}, headers }
 
         it { expect(response.status).to eql(401) }
       end
-    end
-
-    describe 'DELETE api/v1/projects/:project_id' do
-      before { delete "/api/v1/projects/#{project.id}", {}, headers }
-
-      it { expect(response.status).to eql(401) }
     end
   end
 
@@ -74,12 +79,7 @@ describe 'Projects requests', type: :request do
 
     describe 'POST api/v1/projects' do
       context 'with valid data' do
-        let(:json) { {
-            data: {
-                type: 'projects',
-                attributes: FactoryGirl.attributes_for(:project)
-            }
-        }.to_json }
+        let(:json) { create_valid_project_json }
 
         before { post '/api/v1/projects', json, headers }
 
@@ -87,7 +87,9 @@ describe 'Projects requests', type: :request do
       end
     end
 
-    describe 'request methods that concern a single rule' do
+    describe 'requests that concern a specific instance' do
+      let(:project) { FactoryGirl.create(:project) }
+
       context 'the current user is not a project member' do
         describe 'GET api/v1/projects/:project_id' do
           before { get "/api/v1/projects/#{project.id}", {}, headers }
@@ -97,17 +99,11 @@ describe 'Projects requests', type: :request do
 
         describe 'PUT api/v1/projects/:project_id' do
           context 'with valid data' do
-            let(:json) { {
-                data: {
-                    type: 'projects',
-                    id: project.id.to_s,
-                    attributes: FactoryGirl.attributes_for(:project)
-                }
-            }.to_json }
+            let(:json) { create_valid_project_json(project.id) }
 
             before { put "/api/v1/projects/#{project.id}", json, headers }
 
-            it { expect(response.status).to eql(401) }
+            it { expect(response.status).to eql(403) }
           end
         end
 
@@ -129,13 +125,7 @@ describe 'Projects requests', type: :request do
 
         describe 'PUT api/v1/projects/:project_id' do
           context 'with valid data' do
-            let(:json) { {
-                data: {
-                    type: 'projects',
-                    id: project.id.to_s,
-                    attributes: FactoryGirl.attributes_for(:project)
-                }
-            }.to_json }
+            let(:json) { create_valid_project_json(project.id) }
 
             before { put "/api/v1/projects/#{project.id}", json, headers }
 
