@@ -2,7 +2,7 @@ class DataElementPolicy < ApplicationPolicy
   alias_attribute :data_element, :record
 
   def index?
-    true
+    false
   end
 
   def show?

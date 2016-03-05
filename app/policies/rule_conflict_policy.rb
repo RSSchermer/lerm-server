@@ -2,7 +2,7 @@ class RuleConflictPolicy < ApplicationPolicy
   alias_attribute :rule_conflict, :record
 
   def index?
-    true
+    false
   end
 
   def show?

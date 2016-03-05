@@ -11,7 +11,7 @@ describe RuleConflictPolicy do
     subject(:policy) { RuleConflictPolicy.new(user, rule_conflict) }
 
     describe 'index?' do
-      it { expect(policy.index?).to be_truthy }
+      it { expect(policy.index?).to be_falsey }
     end
 
     describe 'show?' do
@@ -36,7 +36,7 @@ describe RuleConflictPolicy do
     subject(:policy) { RuleConflictPolicy.new(user, rule_conflict) }
 
     describe 'index?' do
-      it { expect(policy.index?).to be_truthy }
+      it { expect(policy.index?).to be_falsey }
     end
 
     describe 'show?' do
@@ -63,7 +63,7 @@ describe RuleConflictPolicy do
     before { FactoryGirl.create(:membership, user: user, project: project)}
 
     describe 'index?' do
-      it { expect(policy.index?).to be_truthy }
+      it { expect(policy.index?).to be_falsey }
     end
 
     describe 'show?' do
@@ -88,7 +88,7 @@ describe RuleConflictPolicy do
     subject(:policy) { RuleConflictPolicy.new(user, rule_conflict) }
 
     describe 'index?' do
-      it { expect(policy.index?).to be_truthy }
+      it { expect(policy.index?).to be_falsey }
     end
 
     describe 'show?' do

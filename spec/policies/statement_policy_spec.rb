@@ -10,7 +10,7 @@ describe StatementPolicy do
     subject(:policy) { StatementPolicy.new(user, statement) }
 
     describe 'index?' do
-      it { expect(policy.index?).to be_truthy }
+      it { expect(policy.index?).to be_falsey }
     end
 
     describe 'show?' do
@@ -35,7 +35,7 @@ describe StatementPolicy do
     subject(:policy) { StatementPolicy.new(user, statement) }
 
     describe 'index?' do
-      it { expect(policy.index?).to be_truthy }
+      it { expect(policy.index?).to be_falsey }
     end
 
     describe 'show?' do
@@ -62,7 +62,7 @@ describe StatementPolicy do
     before { FactoryGirl.create(:membership, user: user, project: project)}
 
     describe 'index?' do
-      it { expect(policy.index?).to be_truthy }
+      it { expect(policy.index?).to be_falsey }
     end
 
     describe 'show?' do
@@ -87,7 +87,7 @@ describe StatementPolicy do
     subject(:policy) { StatementPolicy.new(user, statement) }
 
     describe 'index?' do
-      it { expect(policy.index?).to be_truthy }
+      it { expect(policy.index?).to be_falsey }
     end
 
     describe 'show?' do

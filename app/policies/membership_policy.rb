@@ -2,7 +2,7 @@ class MembershipPolicy < ApplicationPolicy
   alias_attribute :membership, :record
 
   def index?
-    true
+    false
   end
 
   def show?

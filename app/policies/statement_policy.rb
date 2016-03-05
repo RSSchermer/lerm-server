@@ -2,7 +2,7 @@ class StatementPolicy < ApplicationPolicy
   alias_attribute :statement, :record
 
   def index?
-    true
+    false
   end
 
   def show?

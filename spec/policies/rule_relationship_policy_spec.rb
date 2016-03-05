@@ -11,7 +11,7 @@ describe RuleRelationshipPolicy do
     subject(:policy) { RuleRelationshipPolicy.new(user, rule_relationship) }
 
     describe 'index?' do
-      it { expect(policy.index?).to be_truthy }
+      it { expect(policy.index?).to be_falsey }
     end
 
     describe 'show?' do
@@ -36,7 +36,7 @@ describe RuleRelationshipPolicy do
     subject(:policy) { RuleRelationshipPolicy.new(user, rule_relationship) }
 
     describe 'index?' do
-      it { expect(policy.index?).to be_truthy }
+      it { expect(policy.index?).to be_falsey }
     end
 
     describe 'show?' do
@@ -63,7 +63,7 @@ describe RuleRelationshipPolicy do
     before { FactoryGirl.create(:membership, user: user, project: project)}
 
     describe 'index?' do
-      it { expect(policy.index?).to be_truthy }
+      it { expect(policy.index?).to be_falsey }
     end
 
     describe 'show?' do
@@ -88,7 +88,7 @@ describe RuleRelationshipPolicy do
     subject(:policy) { RuleRelationshipPolicy.new(user, rule_relationship) }
 
     describe 'index?' do
-      it { expect(policy.index?).to be_truthy }
+      it { expect(policy.index?).to be_falsey }
     end
 
     describe 'show?' do

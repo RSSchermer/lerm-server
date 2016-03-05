@@ -2,7 +2,7 @@ class PhrasePolicy < ApplicationPolicy
   alias_attribute :phrase, :record
 
   def index?
-    true
+    false
   end
 
   def show?

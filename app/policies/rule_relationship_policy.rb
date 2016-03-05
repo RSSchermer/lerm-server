@@ -2,7 +2,7 @@ class RuleRelationshipPolicy < ApplicationPolicy
   alias_attribute :rule_relationship, :record
 
   def index?
-    true
+    false
   end
 
   def show?
