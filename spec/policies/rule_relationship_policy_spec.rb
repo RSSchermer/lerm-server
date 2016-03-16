@@ -2,9 +2,9 @@ require 'rails_helper'
 
 describe RuleRelationshipPolicy do
   let(:project) { FactoryGirl.create(:project) }
-  let(:rule_1) { FactoryGirl.create(:rule, project: project) }
-  let(:rule_2) { FactoryGirl.create(:rule, project: project) }
-  let(:rule_relationship) { FactoryGirl.create(:rule_relationship, rule_1: rule_1, rule_2: rule_2, project: project) }
+  let(:rule_one) { FactoryGirl.create(:rule, project: project) }
+  let(:rule_two) { FactoryGirl.create(:rule, project: project) }
+  let(:rule_relationship) { FactoryGirl.create(:rule_relationship, rule_one: rule_one, rule_two: rule_two, project: project) }
 
   context 'unauthenticated user' do
     let(:user) { nil }

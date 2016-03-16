@@ -104,8 +104,8 @@ ActiveRecord::Schema.define(version: 20160214102030) do
   add_index "projects", ["name"], name: "index_projects_on_name", unique: true
 
   create_table "rule_conflicts", force: :cascade do |t|
-    t.integer  "rule_1_id",   null: false
-    t.integer  "rule_2_id",   null: false
+    t.integer  "rule_one_id", null: false
+    t.integer  "rule_two_id", null: false
     t.text     "description"
     t.integer  "project_id",  null: false
     t.datetime "created_at",  null: false
@@ -113,12 +113,12 @@ ActiveRecord::Schema.define(version: 20160214102030) do
   end
 
   add_index "rule_conflicts", ["project_id"], name: "index_rule_conflicts_on_project_id"
-  add_index "rule_conflicts", ["rule_1_id"], name: "index_rule_conflicts_on_rule_1_id"
-  add_index "rule_conflicts", ["rule_2_id"], name: "index_rule_conflicts_on_rule_2_id"
+  add_index "rule_conflicts", ["rule_one_id"], name: "index_rule_conflicts_on_rule_one_id"
+  add_index "rule_conflicts", ["rule_two_id"], name: "index_rule_conflicts_on_rule_two_id"
 
   create_table "rule_relationships", force: :cascade do |t|
-    t.integer  "rule_1_id",   null: false
-    t.integer  "rule_2_id",   null: false
+    t.integer  "rule_one_id", null: false
+    t.integer  "rule_two_id", null: false
     t.text     "description"
     t.integer  "project_id",  null: false
     t.datetime "created_at",  null: false
@@ -126,8 +126,8 @@ ActiveRecord::Schema.define(version: 20160214102030) do
   end
 
   add_index "rule_relationships", ["project_id"], name: "index_rule_relationships_on_project_id"
-  add_index "rule_relationships", ["rule_1_id"], name: "index_rule_relationships_on_rule_1_id"
-  add_index "rule_relationships", ["rule_2_id"], name: "index_rule_relationships_on_rule_2_id"
+  add_index "rule_relationships", ["rule_one_id"], name: "index_rule_relationships_on_rule_one_id"
+  add_index "rule_relationships", ["rule_two_id"], name: "index_rule_relationships_on_rule_two_id"
 
   create_table "rules", force: :cascade do |t|
     t.string   "label",          null: false

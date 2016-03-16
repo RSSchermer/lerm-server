@@ -13,11 +13,11 @@ describe 'RuleRelationships requests', type: :request do
             },
             relationships: {
                 project: { data: { type: 'projects', id: owner_project.id.to_s } },
-                'rule-1': { data: {
+                'rule-one': { data: {
                     type: 'rules',
                     id: FactoryGirl.create(:rule, project: owner_project).id.to_s
                 } },
-                'rule-2': { data: {
+                'rule-two': { data: {
                     type: 'rules',
                     id: FactoryGirl.create(:rule, project: owner_project).id.to_s
                 } }

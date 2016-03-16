@@ -48,20 +48,20 @@ describe Rule do
     let(:other_rule) { FactoryGirl.create(:rule, project: project) }
 
     context 'with outgoing conflicts' do
-      let!(:outgoing_conflict) { FactoryGirl.create(:rule_conflict, rule_1: rule, rule_2: other_rule) }
+      let!(:outgoing_conflict) { FactoryGirl.create(:rule_conflict, rule_one: rule, rule_two: other_rule) }
 
       it { expect(rule.rule_conflicts).to contain_exactly(outgoing_conflict)}
     end
 
     context 'with incoming conflicts' do
-      let!(:incoming_conflict) { FactoryGirl.create(:rule_conflict, rule_1: other_rule, rule_2: rule) }
+      let!(:incoming_conflict) { FactoryGirl.create(:rule_conflict, rule_one: other_rule, rule_two: rule) }
 
       it { expect(rule.rule_conflicts).to contain_exactly(incoming_conflict)}
     end
 
     context 'with incoming and outgoing conflicts' do
-      let!(:outgoing_conflict) { FactoryGirl.create(:rule_conflict, rule_1: rule, rule_2: other_rule) }
-      let!(:incoming_conflict) { FactoryGirl.create(:rule_conflict, rule_1: other_rule, rule_2: rule) }
+      let!(:outgoing_conflict) { FactoryGirl.create(:rule_conflict, rule_one: rule, rule_two: other_rule) }
+      let!(:incoming_conflict) { FactoryGirl.create(:rule_conflict, rule_one: other_rule, rule_two: rule) }
 
       it { expect(rule.rule_conflicts).to contain_exactly(outgoing_conflict, incoming_conflict)}
     end
@@ -72,20 +72,20 @@ describe Rule do
     let(:other_rule) { FactoryGirl.create(:rule, project: project) }
 
     context 'with outgoing relationships' do
-      let!(:outgoing_relationship) { FactoryGirl.create(:rule_relationship, rule_1: rule, rule_2: other_rule) }
+      let!(:outgoing_relationship) { FactoryGirl.create(:rule_relationship, rule_one: rule, rule_two: other_rule) }
 
       it { expect(rule.rule_relationships).to contain_exactly(outgoing_relationship)}
     end
 
     context 'with incoming relationships' do
-      let!(:incoming_relationship) { FactoryGirl.create(:rule_relationship, rule_1: other_rule, rule_2: rule) }
+      let!(:incoming_relationship) { FactoryGirl.create(:rule_relationship, rule_one: other_rule, rule_two: rule) }
 
       it { expect(rule.rule_relationships).to contain_exactly(incoming_relationship)}
     end
 
     context 'with incoming and outgoing relationships' do
-      let!(:outgoing_relationship) { FactoryGirl.create(:rule_relationship, rule_1: rule, rule_2: other_rule) }
-      let!(:incoming_relationship) { FactoryGirl.create(:rule_relationship, rule_1: other_rule, rule_2: rule) }
+      let!(:outgoing_relationship) { FactoryGirl.create(:rule_relationship, rule_one: rule, rule_two: other_rule) }
+      let!(:incoming_relationship) { FactoryGirl.create(:rule_relationship, rule_one: other_rule, rule_two: rule) }
 
       it { expect(rule.rule_relationships).to contain_exactly(outgoing_relationship, incoming_relationship)}
     end

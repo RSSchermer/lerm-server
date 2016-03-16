@@ -1,10 +1,10 @@
 class RuleRelationship < ActiveRecord::Base
-  belongs_to :rule_1, class_name: 'Rule'
-  belongs_to :rule_2, class_name: 'Rule'
+  belongs_to :rule_one, class_name: 'Rule'
+  belongs_to :rule_two, class_name: 'Rule'
   belongs_to :project
 
-  validates :rule_1_id, presence: true
-  validates :rule_2_id, presence: true
+  validates :rule_one_id, presence: true
+  validates :rule_two_id, presence: true
   validates :description, presence: true
   validates :project_id, presence: true
 end

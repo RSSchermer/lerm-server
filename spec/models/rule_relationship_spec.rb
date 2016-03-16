@@ -7,14 +7,14 @@ describe RuleRelationship do
     expect(rule_relationship).to be_valid
   end
 
-  context 'without a rule_1' do
-    before { rule_relationship.rule_1 = nil }
+  context 'without a rule_one' do
+    before { rule_relationship.rule_one = nil }
 
     it { expect(rule_relationship).to_not be_valid }
   end
 
-  context 'without a rule_2' do
-    before { rule_relationship.rule_2 = nil }
+  context 'without a rule_two' do
+    before { rule_relationship.rule_two = nil }
 
     it { expect(rule_relationship).to_not be_valid }
   end

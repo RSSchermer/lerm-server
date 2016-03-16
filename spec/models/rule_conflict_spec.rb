@@ -7,14 +7,14 @@ describe RuleConflict do
     expect(rule_conflict).to be_valid
   end
 
-  context 'without a rule_1' do
-    before { rule_conflict.rule_1 = nil }
+  context 'without a rule_one' do
+    before { rule_conflict.rule_one = nil }
 
     it { expect(rule_conflict).to_not be_valid }
   end
 
-  context 'without a rule_2' do
-    before { rule_conflict.rule_2 = nil }
+  context 'without a rule_two' do
+    before { rule_conflict.rule_two = nil }
 
     it { expect(rule_conflict).to_not be_valid }
   end
