@@ -1,7 +1,7 @@
 class CreatePhrases < ActiveRecord::Migration
   def change
     create_table :phrases do |t|
-      t.string :text, null: false
+      t.string :original_text, null: false
       t.string :cleaned_text
       t.boolean :discarded
       t.boolean :crisp

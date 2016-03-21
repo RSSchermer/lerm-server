@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :phrase do
-    text { Faker::Lorem.words }
+    original_text { Faker::Lorem.words }
     cleaned_text { Faker::Lorem.words }
     discarded false
     crisp false

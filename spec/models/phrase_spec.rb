@@ -8,8 +8,8 @@ describe Phrase do
     expect(phrase).to be_valid
   end
 
-  context 'without text' do
-    before { phrase.text = nil }
+  context 'without original text' do
+    before { phrase.original_text = nil }
 
     it { expect(phrase).to_not be_valid }
   end
@@ -17,7 +17,7 @@ describe Phrase do
   context 'with a non-unique name within a rule' do
     let(:other_phrase) { FactoryGirl.create(:phrase, rule: rule) }
 
-    before { phrase.text = other_phrase.text }
+    before { phrase.original_text = other_phrase.original_text }
 
     it { expect(phrase).to_not be_valid }
   end
@@ -26,7 +26,7 @@ describe Phrase do
     let(:other_rule) { FactoryGirl.create(:rule) }
     let(:other_phrase) { FactoryGirl.create(:phrase, rule: other_rule) }
 
-    before { phrase.text = other_phrase.text }
+    before { phrase.original_text = other_phrase.original_text }
 
     it { expect(phrase).to be_valid }
   end

@@ -10,7 +10,7 @@ describe 'Phrases requests', type: :request do
         data: {
             type: 'phrases',
             attributes: {
-                text: Faker::Lorem.word
+                'original-text': Faker::Lorem.word
             },
             relationships: {
                 rule: { data: { type: 'rules', id: owner_rule.id.to_s } }

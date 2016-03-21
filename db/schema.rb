@@ -82,7 +82,7 @@ ActiveRecord::Schema.define(version: 20160214102030) do
   add_index "oauth_applications", ["uid"], name: "index_oauth_applications_on_uid", unique: true
 
   create_table "phrases", force: :cascade do |t|
-    t.string   "text",                    null: false
+    t.string   "original_text",           null: false
     t.string   "cleaned_text"
     t.boolean  "discarded"
     t.boolean  "crisp"
