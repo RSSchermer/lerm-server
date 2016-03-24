@@ -8,14 +8,14 @@ describe Statement do
     expect(statement).to be_valid
   end
 
-  context 'without a condition' do
-    before { statement.condition = nil }
+  context 'without an original condition' do
+    before { statement.original_condition = nil }
 
     it { expect(statement).to_not be_valid }
   end
 
-  context 'without a consequence' do
-    before { statement.consequence = nil }
+  context 'without an original consequence' do
+    before { statement.original_consequence = nil }
 
     it { expect(statement).to_not be_valid }
   end

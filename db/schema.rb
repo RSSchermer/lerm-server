@@ -143,14 +143,14 @@ ActiveRecord::Schema.define(version: 20160214102030) do
   add_index "rules", ["project_id"], name: "index_rules_on_project_id"
 
   create_table "statements", force: :cascade do |t|
-    t.text     "condition",                           null: false
-    t.text     "consequence",                         null: false
+    t.text     "original_condition",                   null: false
+    t.text     "original_consequence",                 null: false
     t.text     "cleaned_condition"
     t.text     "cleaned_consequence"
-    t.boolean  "discarded",           default: false
-    t.integer  "rule_id",                             null: false
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.boolean  "discarded",            default: false
+    t.integer  "rule_id",                              null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
   end
 
   add_index "statements", ["rule_id"], name: "index_statements_on_rule_id"

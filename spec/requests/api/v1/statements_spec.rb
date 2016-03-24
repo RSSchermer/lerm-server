@@ -10,8 +10,8 @@ describe 'Statements requests', type: :request do
         data: {
             type: 'statements',
             attributes: {
-                condition: Faker::Lorem.sentence,
-                consequence: Faker::Lorem.sentence
+                'original-condition': Faker::Lorem.sentence,
+                'original-consequence': Faker::Lorem.sentence
             },
             relationships: {
                 rule: { data: { type: 'rules', id: owner_rule.id.to_s } }
