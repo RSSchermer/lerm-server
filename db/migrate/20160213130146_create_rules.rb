@@ -5,6 +5,7 @@ class CreateRules < ActiveRecord::Migration
       t.string :source
       t.text :original_text
       t.text :proactive_form
+      t.integer :formalization_status, default: 0
       t.references :project, index: true, foreign_key: true, null: false
 
       t.timestamps null: false

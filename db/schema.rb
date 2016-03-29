@@ -130,13 +130,14 @@ ActiveRecord::Schema.define(version: 20160214102030) do
   add_index "rule_relationships", ["rule_two_id"], name: "index_rule_relationships_on_rule_two_id"
 
   create_table "rules", force: :cascade do |t|
-    t.string   "label",          null: false
+    t.string   "label",                            null: false
     t.string   "source"
     t.text     "original_text"
     t.text     "proactive_form"
-    t.integer  "project_id",     null: false
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.integer  "formalization_status", default: 0
+    t.integer  "project_id",                       null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
   end
 
   add_index "rules", ["label"], name: "index_rules_on_label"

@@ -1,6 +1,8 @@
 class Rule < ActiveRecord::Base
   default_scope { order(:label) }
 
+  enum formalization_status: [:unfinished, :unimplementable, :partially_implemented, :fully_implemented]
+
   belongs_to :project
   has_many :phrases, dependent: :destroy
   has_many :statements, dependent: :destroy
