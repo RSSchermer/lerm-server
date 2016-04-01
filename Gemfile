@@ -5,7 +5,6 @@ ruby '2.3.0'
 # General
 gem 'rails', '4.2.5.1'
 gem 'unicorn'
-gem 'sqlite3'
 gem 'slim-rails'
 
 # Forms
@@ -35,6 +34,7 @@ gem 'turbolinks'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 group :development, :test do
+  gem 'sqlite3'
   gem 'byebug'
   gem 'rspec-rails', '~> 3.0'
   gem 'factory_girl_rails'
@@ -46,4 +46,9 @@ group :development do
   gem 'spring'
   gem 'rails_layout'
   gem 'habtm_generator'
+end
+
+group :production do
+  gem 'pg'
+  gem 'rails_12factor'
 end
