@@ -6,6 +6,5 @@ class DataElement < ActiveRecord::Base
   has_many :rules, through: :phrases
 
   validates :label, presence: true, uniqueness: { scope: :project }
-  validates :description, presence: true
   validates :project_id, presence: true
 end
