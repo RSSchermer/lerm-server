@@ -4,7 +4,12 @@ Rails.application.routes.draw do
 
   scope 'api/v1', module: 'api/v1' do
     jsonapi_resources :users
-    jsonapi_resources :projects
+
+    jsonapi_resources :projects do
+      jsonapi_relationships
+      resources :clones, only: [:create]
+    end
+
     jsonapi_resources :memberships
     jsonapi_resources :rules
     jsonapi_resources :data_elements
