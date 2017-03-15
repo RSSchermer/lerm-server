@@ -26,6 +26,10 @@ describe ProjectPolicy do
     describe 'destroy?' do
       it { expect(policy.destroy?).to be_falsey }
     end
+
+    describe 'clone?' do
+      it { expect(policy.clone?).to be_falsey }
+    end
   end
 
   context 'normal user that is not a project member' do
@@ -50,6 +54,10 @@ describe ProjectPolicy do
 
     describe 'destroy?' do
       it { expect(policy.destroy?).to be_falsey }
+    end
+
+    describe 'clone?' do
+      it { expect(policy.clone?).to be_truthy }
     end
   end
 
@@ -78,6 +86,10 @@ describe ProjectPolicy do
     describe 'destroy?' do
       it { expect(policy.destroy?).to be_truthy }
     end
+
+    describe 'clone?' do
+      it { expect(policy.clone?).to be_truthy }
+    end
   end
 
   context 'super admin user' do
@@ -102,6 +114,10 @@ describe ProjectPolicy do
 
     describe 'destroy?' do
       it { expect(policy.destroy?).to be_truthy }
+    end
+
+    describe 'clone?' do
+      it { expect(policy.clone?).to be_truthy }
     end
   end
 end

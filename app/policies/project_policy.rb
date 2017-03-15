@@ -32,4 +32,8 @@ class ProjectPolicy < ApplicationPolicy
   def destroy?
     manage?
   end
+
+  def clone?
+    !user.nil?
+  end
 end
